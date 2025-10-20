@@ -12,7 +12,6 @@
 # Documentation:
 # @raycast.description Toggles both macOS Appearance and Darkreader's Chrome extension (must keyboard shortcut to option+d).
 
-
 osascript <<EOF
 -- Get current macOS appearanace mod3
 tell application "System Events"
@@ -31,7 +30,7 @@ end tell
 -- Give system time to apply changes
 delay 1
 
-tell application "Google Chrome"
+tell application "Arc"
   activate
 end tell
 
