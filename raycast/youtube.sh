@@ -2,14 +2,14 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Generate Youtube Transcript
+# @raycast.title Summarize Youtube Video
 # @raycast.mode fullOutput
 
 # Optional parameters:
 # @raycast.icon 🎥
 
 # Documentation:
-# @raycast.description Generates a transcript from the YT URL in your clipboard and copies it to your clipboard
+# @raycast.description Generates a transcript from YT URL in clipboard and runs Farbric AI's youtube_summary pattern
 # @raycast.author Andy Huynh
 # @raycast.authorURL https://github.com/andy4thehuynh
 
@@ -28,8 +28,10 @@ is_valid_youtube_url() {
 
 if command -v fabric-ai >/dev/null 2>&1 && is_valid_youtube_url "$youtube_url"; then
   echo "🦄 Fetching: $youtube_url"
-  fabric-ai -y "$youtube_url" --yt-dlp-args="--format best" | pbcopy
-  echo "✅ Transcript copied to clipboard!"
+
+  fabric-ai -y "$youtube_url" --yt-dlp-args="--format best" |
+    fabric-ai -p youtube_summary |
+    tee >(pbcopy)
 elif ! command -v fabric-ai >/dev/null 2>&1; then
   echo "❌ Error: fabric-ai command not found in PATH: $PATH"
   exit 1
