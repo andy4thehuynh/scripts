@@ -12,10 +12,13 @@
 # Documentation:
 # @raycast.description Remove all new lines from clipboard contents and copy the cleaned text back to clipboard.
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/.venv/bin/activate"
+
 # Ensure pyperclip is installed for the current Python environment
 python3 -c "import pyperclip" 2>/dev/null
 if [ $? -ne 0 ]; then
-  python3 -m pip install --user pyperclip
+  python3 -m pip install pyperclip
 fi
 
 # Run the Python code
@@ -46,3 +49,5 @@ def main():
 if __name__ == "__main__":
     main()
 EOF
+
+deactivate
