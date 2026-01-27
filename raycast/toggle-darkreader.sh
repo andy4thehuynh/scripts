@@ -37,8 +37,10 @@ end tell
 delay 0.5
 
 tell application "System Events"
-  key down option
+  key down shift
+  key down command
   keystroke "d"
-  key up option
+  key up command
+  key up shift
 end tell
 EOF
